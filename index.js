@@ -30,10 +30,10 @@ Router
              }
        })
       .on('end', () => {
-          o.secret = Buffer.conctat(o.secret);   
+
     }));
     boy.on('finish', () => {
-      // FINITA
+      o.secret = Buffer.concat(o.secret);
       let result;
       try {
            result = dec(o.key, o.secret);
