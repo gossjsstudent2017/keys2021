@@ -28,10 +28,7 @@ Router
              } else {
                  o[fieldname].push(data);
              }
-       })
-      .on('end', () => {
-
-    }));
+       }));
     boy.on('finish', () => {
       o.secret = Buffer.concat(o.secret);
       let result;
