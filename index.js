@@ -19,11 +19,19 @@ Router
   .get(r => r.res.end('Привет мир!'))
   .post(async (req, res) => {
     console.log(req.headers);
-    let o = {};
+    let o = {key: '', secret: []};
     const boy = new Busboy({ headers: req.headers });
     boy.on('file', (fieldname, file) => file
-      .on('data', data => (o[fieldname] = data))
-      .on('end', () => console.log('File [' + fieldname + '] Finished')));
+      .on('data', data => {
+             if (fieldname == 'key') {
+                 o[fieldname] += data;
+             } else {
+                 o[fieldname].push(data);
+             }
+       })
+      .on('end', () => {
+          o.secret = Buffer.conctat(o.secret);   
+    }));
     boy.on('finish', () => {
       // FINITA
       let result;
