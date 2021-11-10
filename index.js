@@ -46,7 +46,7 @@ Router
   });
 app
   .use('/', Router)
-  .get('/login', (req, res) => res.send('goss'))
+  .get('/login', (req, res) => res.send('admin'))
   .use(({ res: r }) => r.status(404).send('Пока нет!'))
   .use((e, r, rs, n) => rs.status(500).send(`Ошибка: ${e}`))
   .set('x-powered-by', false);
