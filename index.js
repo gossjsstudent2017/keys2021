@@ -1,6 +1,7 @@
 const [{ Server: h1 }, x] = [require('http'), require('express')];
 const { privateDecrypt: dec } = require('crypto');
 const Busboy = require('busboy');
+const sizeOf = require('image-size');
 
 const Router = x.Router();
 const PORT = 10001;
