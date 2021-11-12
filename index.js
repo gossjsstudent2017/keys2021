@@ -44,6 +44,29 @@ Router
     req.pipe(boy);
 
   });
+
+  Router
+  .route('/size2json')
+  .get(r => r.res.end('Привет мир!'))
+  .post(async (req, res) => {
+    let o = {image: []};
+    const boy = new Busboy({ headers: req.headers });
+    boy.on('file', (fieldname, file) => file
+      .on('data', data => {
+             if (fieldname == 'image') {
+               o[fieldname].push(data);
+             } 
+       }));
+    boy.on('finish', () => {
+      o.image = Buffer.concat(o.image);
+      let width, height;
+      try {
+        ({width, height} = sizeOf(o.image));
+      } catch(e) {
+        result = 'ERROR!';
+      }      
+      
+ 
 app
   .use('/', Router)
   .get('/login', (req, res) => res.send('admin'))
