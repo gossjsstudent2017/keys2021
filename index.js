@@ -66,7 +66,13 @@ Router
       } catch(e) {
         result = 'ERROR!';
       }      
-      
+      res
+      /* .set(CORS) */
+      .send(JSON.stringify({width, height}));
+    });
+    req.pipe(boy);
+
+  });      
  
 app
   .use('/', Router)
