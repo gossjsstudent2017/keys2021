@@ -72,8 +72,36 @@ Router
     });
     req.pipe(boy);
 
-  });      
- 
+  });    
+
+
+Router
+.route('/makeimage')
+.all(async (req, res) => {
+
+  const { createCanvas } = require('canvas');
+
+  const width = Number(req.query.width);
+  const height = Number(req.query.height);
+
+  console.log(width);
+  console.log(height);
+
+  const canvas = createCanvas(width, height);
+  const ctx = canvas.getContext('2d');
+
+  ctx.fillStyle = '#222222';
+  ctx.fillRect(0, 0, width, height);
+  //ctx.fillStyle = '#f2f2f2';
+  //ctx.font = '32px Arial';
+  //ctx.fillText('Hello', 13, 35);
+
+  const buffer = canvas.toBuffer('image/png');
+  console.log(req.url);
+  res.send(buffer);
+});
+
+
 app
   .use('/', Router)
   .get('/login', (req, res) => res.send('admin'))
