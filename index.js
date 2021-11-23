@@ -5,14 +5,14 @@ const sizeOf = require('image-size');
 
 const Router = x.Router();
 const PORT = 10001;
-/*
+
 const CORS = {
     "Access-Control-Allow-Origin": "*",
     "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,OPTIONS",
     "Access-Control-Allow-Headers":
     "Content-Type,Accept,Access-Control-Allow-Headers",
 };
-*/
+
 const { log } = console;
 const app = x();
 Router
@@ -104,7 +104,7 @@ Router
 
 app
   .use('/', Router)
-  .get('/login', (req, res) => res.send('admin'))
+  .get('/login', (req, res) => res.set(CORS).send('admin'))
   .use(({ res: r }) => r.status(404).send('Пока нет!'))
   .use((e, r, rs, n) => rs.status(500).send(`Ошибка: ${e}`))
   .set('x-powered-by', false);
