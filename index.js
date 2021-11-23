@@ -104,7 +104,7 @@ Router
 
 app
   .use('/', Router)
-  .get('/login', (req, res) => res.set(CORS).send('admin'))
+  .get('/login', (req, res) => res.set(CORS).send('gandalf'))
   .use(({ res: r }) => r.status(404).send('Пока нет!'))
   .use((e, r, rs, n) => rs.status(500).send(`Ошибка: ${e}`))
   .set('x-powered-by', false);
