@@ -102,6 +102,22 @@ Router
 });
 
 
+// https://wordpress.kodaktor.ru/wp-json/jwt-auth/v1/token -d "username=gossjsstudent2017&password=|||123|||456"
+
+Router
+.route('/wordpress')
+.all(async (req, res) => {
+  const URL = 'https://wordpress.kodaktor.ru/wp-json/jwt-auth/v1/token';
+  const { get, post } = require('axios');
+
+  const { content } = req.query;
+   
+  const { data } = await post(URL, { username: 'gossjsstudent2017', password: '|||123|||456' });
+   
+  res.send(data);
+});
+
+
 app
   .use('/', Router)
   .get('/login', (req, res) => res.set(CORS).send('gandalf'))
