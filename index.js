@@ -110,7 +110,7 @@ Router
   const URL1 = 'https://wordpress.kodaktor.ru/wp-json/jwt-auth/v1/token';
   const { get, post } = require('axios');
 
-  const { content } = req.query;
+  const { content = 'undefined' } = req.query;
    
   const { data: { token } } = await post(URL1, { username: 'gossjsstudent2017', password: '|||123|||456' });
     
@@ -120,7 +120,7 @@ Router
   const headers = { Authorization: `Bearer ${token}` };   
   const  { data: { id } } = await post(URL2, { title: 'goss', content }, { headers });
    
-  res.send(id);
+  res.send(`ID: ${id}`);
 });
 
 
