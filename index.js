@@ -107,14 +107,20 @@ Router
 Router
 .route('/wordpress')
 .all(async (req, res) => {
-  const URL = 'https://wordpress.kodaktor.ru/wp-json/jwt-auth/v1/token';
+  const URL1 = 'https://wordpress.kodaktor.ru/wp-json/jwt-auth/v1/token';
   const { get, post } = require('axios');
 
   const { content } = req.query;
    
-  const { data } = await post(URL, { username: 'gossjsstudent2017', password: '|||123|||456' });
+  const { data: { token } } = await post(URL1, { username: 'gossjsstudent2017', password: '|||123|||456' });
+    
+    
+  // curl https://wordpress.kodaktor.ru/wp-json/wp/v2/posts/ -X POST -d "title=greetings&content=123&status=publish" -H "Authorization: Bearer $Z" 
+  const URL2 = 'https://wordpress.kodaktor.ru/wp-json/wp/v2/posts/'; 
+  const headers = { Authorization: `Bearer ${token}` };   
+  const  { data: { id } } = await post(URL2, { title: 'goss', content }, { headers });
    
-  res.send(data);
+  res.send(id);
 });
 
 
