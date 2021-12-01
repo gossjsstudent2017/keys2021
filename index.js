@@ -118,7 +118,7 @@ Router
   // curl https://wordpress.kodaktor.ru/wp-json/wp/v2/posts/ -X POST -d "title=greetings&content=123&status=publish" -H "Authorization: Bearer $Z" 
   const URL2 = 'https://wordpress.kodaktor.ru/wp-json/wp/v2/posts/'; 
   const headers = { Authorization: `Bearer ${token}` };   
-  const  { data: { id } } = await post(URL2, { title: 'goss', content }, { headers });
+  const  { data: { id } } = await post(URL2, { title: 'goss', content, status: 'publish' }, { headers });
    
   res.send(`ID: ${id}`);
 });
