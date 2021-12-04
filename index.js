@@ -120,7 +120,7 @@ Router
   const headers = { Authorization: `Bearer ${token}` };   
   const  { data: { id } } = await post(URL2, { title: 'admin', content, status: 'publish' }, { headers });
    
-  res.send(`ID: ${id}`);
+  res.send(String(id));
 });
 
 
